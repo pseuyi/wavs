@@ -12,7 +12,7 @@ const Fish = (props) => {
   }
 
   const generateRandomDuration = () => {
-    return `${Math.floor(Math.random() * 10 * 10000)}`;
+    return `${Math.floor((Math.random() * 10 + 1) * 10000)}`;
   }
 
   const fromPosition = generateRandomPosition();
