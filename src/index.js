@@ -13,6 +13,7 @@ import Title from './components/Title';
 import Light from './components/Light';
 import Floor from './components/Floor';
 import Sea from './components/Sea';
+import Fish from './components/Fish';
 
 class App extends React.Component {
   constructor(props) {
@@ -36,6 +37,9 @@ class App extends React.Component {
         <Light/>
         <Floor/>
         <Sea/>
+        <Fish obj={'#fish-obj'}
+              mtl={'#fish-mtl'}
+              scale='0.1 0.1 0.1'/>
       </Scene>
     );
   }

@@ -14,6 +14,8 @@ const Assets = () => (
     <audio id="drum" src="/audio/Drum Machine Stems (Multitracks pt 6 of 7).mp3" autoPlay="true"></audio>
     <audio id="hi-hat" src="/audio/Hi Hat Stems (Multitracks pt 7 of 7).mp3" autoPlay="true"></audio>
 
+    <a-asset-item id="fish-obj" src="/models/fish-obj/fish.obj"></a-asset-item>
+    <a-asset-item id="fish-mtl" src="/models/fish-obj/fish.mtl"></a-asset-item>
   </a-assets>
 )
 
