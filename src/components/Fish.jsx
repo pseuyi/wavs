@@ -27,7 +27,7 @@ const Fish = (props) => {
       rotation={rotation}
       scale={props.scale}
       sound={props.sound}
-      >
+    >
       <a-animation
           attribute='position'
           from={fromPosition}

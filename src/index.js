@@ -41,13 +41,14 @@ class App extends React.Component {
         obj={'#fish-obj'}
         mtl={'#fish-mtl'}
         scale='0.1 0.1 0.1'
-        sound={`src: ${sound}; rolloffFactor: 0.3;`}
+        sound={{src: sound, rolloffFactor: 0.3}}
+        key={sound}
       />
     ))
   )
 
   renderTitle = () => (
-    {this.state.title && <Title handleClick={this.handleTitleClick} />}
+    this.state.title && <Title handleClick={this.handleTitleClick} />
   )
 
   render () {
