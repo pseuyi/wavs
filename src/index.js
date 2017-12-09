@@ -17,7 +17,14 @@ import Fish from './components/Fish';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {color: 'red'};
+    this.state = {
+      color: 'red',
+      title: true,
+    };
+  }
+
+  handleTitleClick = () => {
+    this.setState({...this.state, title: false});
   }
 
   changeColor() {
@@ -31,8 +38,12 @@ class App extends React.Component {
     return (
       <Scene>
         <Assets/>
+        {
+          this.state.title && <Title
+            handleClick={this.handleTitleClick}
+          />
+        }
         <Camera/>
-        <Title/>
         <Light/>
         <Floor/>
         <Sea/>

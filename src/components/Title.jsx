@@ -1,8 +1,10 @@
 import React from 'react';
 import {Entity} from 'aframe-react';
 
-const Title = () => (
-  <Entity>
+const Title = ({handleClick}) => (
+  <Entity events={{
+      click: handleClick
+    }}>
     <Entity
       geometry={{primitive: 'plane'}}
       position={{x:0, y:8, z: 0}}
