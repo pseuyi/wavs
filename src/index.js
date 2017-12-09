@@ -2,7 +2,7 @@ import 'aframe';
 import 'aframe-animation-component';
 import 'aframe-particle-system-component';
 import 'babel-polyfill';
-import {Scene} from 'aframe-react';
+import {Scene, Entity} from 'aframe-react';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -28,11 +28,17 @@ class App extends React.Component {
         '#drum',
         '#hi-hat'
       ],
+      assetsLoaded: false,
     };
   }
 
   handleTitleClick = () => {
     this.setState({...this.state, title: false});
+  }
+
+  handleAssetsLoaded = () => {
+    console.log('handleAssetsLoaded')
+    this.setState({ assetsLoaded: true });
   }
 
   renderFish = () => (
@@ -41,7 +47,8 @@ class App extends React.Component {
         obj={'#fish-obj'}
         mtl={'#fish-mtl'}
         scale='0.1 0.1 0.1'
-        sound={{src: sound, rolloffFactor: 0.3}}
+        sound={sound}
+        isSoundLoaded={this.state.assetsLoaded}
         key={sound}
       />
     ))
@@ -53,8 +60,8 @@ class App extends React.Component {
 
   render () {
     return (
-      <Scene>
-        <Assets/>
+      <Scene events={{ loaded: this.handleAssetsLoaded }}>
+        <Assets />
         {this.renderTitle()}
         <Camera/>
         <Light/>
