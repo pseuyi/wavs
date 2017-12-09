@@ -1,10 +1,10 @@
 import React from 'react';
 
 const Assets = () => (
-  <a-assets>
+  <a-assets timeout="10000">
 
-    <img id="groundTexture" src="/images/floor.jpg"/>
-    <img id="seaTexture" src="https://cdn.aframe.io/a-painter/images/sky.jpg"/>
+    <img id="groundTexture" src="/images/floor.jpg" alt="floor"/>
+    <img id="seaTexture" src="https://cdn.aframe.io/a-painter/images/sky.jpg" alt="sea"/>
 
     <audio id="vox" src="/audio/Acapella (Multitracks pt 1 of 7).mp3" autoPlay="true"></audio>
     <audio id="bass" src="/audio/Bass Stems (Multitracks pt 2 of 7).mp3" autoPlay="true"></audio>
