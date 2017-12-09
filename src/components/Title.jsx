@@ -5,7 +5,7 @@ const Title = () => (
   <Entity>
     <Entity text={{value: 'w/a/v/s/w/a/v/s', align: 'center'}} position={{x: 0, y: 2, z: -1}}/>
     <Entity position={{x:0, y:1, z: -1}} text-geometry={{
-      value: 'Aesthetic',
+      value: 'underwater wa wa wa',
       style: 'italic',
       size: 0.8,
       weight: 'bold',

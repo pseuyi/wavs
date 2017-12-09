@@ -2,8 +2,8 @@ import React from 'react';
 
 const Assets = () => (
   <a-assets>
-    <img id="groundTexture" src="/assets/floor.jpg"/>
-    <img id="seaTexture" src="/assets/1.jpg"/>
+    <img id="groundTexture" src="/images/floor.jpg"/>
+    <img id="seaTexture" src="https://cdn.aframe.io/a-painter/images/sky.jpg"/>
   </a-assets>
 )
 
