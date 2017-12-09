@@ -34,7 +34,23 @@ class App extends React.Component {
     });
   }
 
+  generateFish = () => {
+    const fish = [];
+    for (let i = 0; i < 10; i++) {
+      fish.push(
+        <Fish
+          obj={'#fish-obj'}
+          mtl={'#fish-mtl'}
+          scale='0.1 0.1 0.1'
+        />
+      )
+    }
+    return fish;
+  }
+
   render () {
+    const fish = this.generateFish();
+
     return (
       <Scene>
         <Assets/>
@@ -47,11 +63,7 @@ class App extends React.Component {
         <Light/>
         <Floor/>
         <Sea/>
-        <Fish
-          obj={'#fish-obj'}
-          mtl={'#fish-mtl'}
-          scale='0.1 0.1 0.1'
-        />
+        { fish }
       </Scene>
     );
   }
