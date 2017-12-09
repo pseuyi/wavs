@@ -37,9 +37,11 @@ class App extends React.Component {
         <Light/>
         <Floor/>
         <Sea/>
-        <Fish obj={'#fish-obj'}
-              mtl={'#fish-mtl'}
-              scale='0.1 0.1 0.1'/>
+        <Fish
+          obj={'#fish-obj'}
+          mtl={'#fish-mtl'}
+          scale='0.1 0.1 0.1'
+        />
       </Scene>
     );
   }
