@@ -18,8 +18,16 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      color: 'red',
       title: true,
+      sounds: [
+        '#vox',
+        '#bass',
+        '#guitar',
+        '#back-vox',
+        '#bass-drum',
+        '#drum',
+        '#hi-hat'
+      ],
     };
   }
 
@@ -27,43 +35,31 @@ class App extends React.Component {
     this.setState({...this.state, title: false});
   }
 
-  changeColor() {
-    const colors = ['red', 'orange', 'yellow', 'green', 'blue'];
-    this.setState({
-      color: colors[Math.floor(Math.random() * colors.length)]
-    });
-  }
+  renderFish = () => (
+    this.state.sounds.map(sound => (
+      <Fish
+        obj={'#fish-obj'}
+        mtl={'#fish-mtl'}
+        scale='0.1 0.1 0.1'
+        sound={`src: ${sound}; rolloffFactor: 0.3;`}
+      />
+    ))
+  )
 
-  generateFish = () => {
-    const fish = [];
-    for (let i = 0; i < 10; i++) {
-      fish.push(
-        <Fish
-          obj={'#fish-obj'}
-          mtl={'#fish-mtl'}
-          scale='0.1 0.1 0.1'
-        />
-      )
-    }
-    return fish;
-  }
+  renderTitle = () => (
+    {this.state.title && <Title handleClick={this.handleTitleClick} />}
+  )
 
   render () {
-    const fish = this.generateFish();
-
     return (
       <Scene>
         <Assets/>
-        {
-          this.state.title && <Title
-            handleClick={this.handleTitleClick}
-          />
-        }
+        {this.renderTitle()}
         <Camera/>
         <Light/>
         <Floor/>
         <Sea/>
-        { fish }
+        {this.renderFish()}
       </Scene>
     );
   }
