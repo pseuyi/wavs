@@ -1,9 +1,8 @@
 import 'aframe';
-import 'aframe-text-geometry-component';
 import 'aframe-animation-component';
 import 'aframe-particle-system-component';
 import 'babel-polyfill';
-import {Entity, Scene} from 'aframe-react';
+import {Scene} from 'aframe-react';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -18,7 +17,14 @@ import Fish from './components/Fish';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {color: 'red'};
+    this.state = {
+      color: 'red',
+      title: true,
+    };
+  }
+
+  handleTitleClick = () => {
+    this.setState({...this.state, title: false});
   }
 
   changeColor() {
@@ -32,8 +38,12 @@ class App extends React.Component {
     return (
       <Scene>
         <Assets/>
+        {
+          this.state.title && <Title
+            handleClick={this.handleTitleClick}
+          />
+        }
         <Camera/>
-        <Title/>
         <Light/>
         <Floor/>
         <Sea/>
