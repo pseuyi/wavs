@@ -30,7 +30,7 @@ class Fish extends React.Component {
         position={this.fromPosition}
         rotation={this.rotation}
         scale={this.props.scale}
-        sound={`src: ${this.props.sound}`}
+        sound={`src: ${this.props.sound};`}
         _ref={this.props.save}
       >
        <a-animation

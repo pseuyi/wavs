@@ -35,7 +35,7 @@ class App extends React.Component {
   nodes = []
 
   componentDidUpdate () {
-    console.log('component has new state or something ', this.state)
+    this.playAllSounds();
   }
 
   saveSound = (sound) => {
@@ -54,8 +54,8 @@ class App extends React.Component {
   playAllSounds = () => {
     console.log('playing sounds on this # nodes: ', this.nodes.length)
     this.nodes.length && this.nodes.forEach(node => {
-      console.log('playing the node: ', node)
-      node.components.sound.playSound()
+      // console.log('playing the node.components: ', node.components.sound.pool.children[0])
+      node.components.sound.playSound();
     })
   }
 
@@ -78,8 +78,7 @@ class App extends React.Component {
   )
 
   render () {
-    console.log('all the audio nodes', this.nodes)
-    this.playAllSounds()
+    // console.log('all the audio nodes', this.nodes, 'assetsLoaded', this.state.assetsLoaded)
     return (
       <Scene events={{ loaded: this.handleAssetsLoaded }}>
         <Assets />
