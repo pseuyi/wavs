@@ -4,21 +4,10 @@ import {Entity} from 'aframe-react';
 class Fish extends React.Component {
   constructor(props) {
     super(props)
-
-    this.audioNode;
     this.fromPosition = this.generateRandomPosition();
     this.toPosition = this.generateRandomPosition();
     this.rotation = this.generateRandomRotation();
     this.duration = this.generateRandomDuration();
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.isSoundLoaded !== this.props.isSoundLoaded) {
-      if (nextProps.isSoundLoaded) {
-        console.log(this.audioNode);
-        this.audioNode.el.components.sound.playSound();
-      }
-    }
   }
 
   generateRandomPosition = () => {
@@ -41,17 +30,17 @@ class Fish extends React.Component {
         position={this.fromPosition}
         rotation={this.rotation}
         scale={this.props.scale}
-        sound={{ src: this.props.sound }}
-        ref={node => this.audioNode = node}
-        >
-        <a-animation
+        sound={`src: ${this.props.sound}`}
+        _ref={this.props.save}
+      >
+       <a-animation
           attribute='position'
           from={this.fromPosition}
           to={this.toPosition}
           dur={this.duration}
           repeat='indefinite'
           direction='alternate'
-          >
+        >
         </a-animation>
       </Entity>
     )

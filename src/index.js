@@ -2,7 +2,7 @@ import 'aframe';
 import 'aframe-animation-component';
 import 'aframe-particle-system-component';
 import 'babel-polyfill';
-import {Scene, Entity} from 'aframe-react';
+import {Scene} from 'aframe-react';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -32,13 +32,31 @@ class App extends React.Component {
     };
   }
 
+  nodes = []
+
+  componentDidUpdate () {
+    console.log('component has new state or something ', this.state)
+  }
+
+  saveSound = (sound) => {
+    this.nodes.push(sound)
+  }
+
   handleTitleClick = () => {
-    this.setState({...this.state, title: false});
+    this.setState({title: false});
   }
 
   handleAssetsLoaded = () => {
     console.log('handleAssetsLoaded')
     this.setState({ assetsLoaded: true });
+  }
+
+  playAllSounds = () => {
+    console.log('playing sounds on this # nodes: ', this.nodes.length)
+    this.nodes.length && this.nodes.forEach(node => {
+      console.log('playing the node: ', node)
+      node.components.sound.playSound()
+    })
   }
 
   renderFish = () => (
@@ -50,6 +68,7 @@ class App extends React.Component {
         sound={sound}
         isSoundLoaded={this.state.assetsLoaded}
         key={sound}
+        save={this.saveSound}
       />
     ))
   )
@@ -59,6 +78,8 @@ class App extends React.Component {
   )
 
   render () {
+    console.log('all the audio nodes', this.nodes)
+    this.playAllSounds()
     return (
       <Scene events={{ loaded: this.handleAssetsLoaded }}>
         <Assets />
@@ -67,7 +88,7 @@ class App extends React.Component {
         <Light/>
         <Floor/>
         <Sea/>
-        {this.renderFish()}
+        {this.state.assetsLoaded && this.renderFish()}
       </Scene>
     );
   }
