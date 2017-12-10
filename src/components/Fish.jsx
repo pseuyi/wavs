@@ -1,43 +1,50 @@
 import React from 'react';
 import {Entity} from 'aframe-react';
 
-const Fish = (props) => {
+class Fish extends React.Component {
+  constructor(props) {
+    super(props)
+    this.fromPosition = this.generateRandomPosition();
+    this.toPosition = this.generateRandomPosition();
+    this.rotation = this.generateRandomRotation();
+    this.duration = this.generateRandomDuration();
+  }
 
-  const generateRandomPosition = () => {
+  generateRandomPosition = () => {
     return `${Math.random() * 100 - 50} ${Math.random() * 10} ${Math.random() * 100 - 50}`;
   }
 
-  const generateRandomRotation = () => {
+  generateRandomRotation = () => {
     return `0 ${Math.random() * 180} 0`;
   }
 
-  const generateRandomDuration = () => {
+  generateRandomDuration = () => {
     return `${Math.floor((Math.random() * 10 + 1) * 10000)}`;
   }
 
-  const fromPosition = generateRandomPosition();
-  const toPosition = generateRandomPosition();
-  const rotation = generateRandomRotation();
-  const duration = generateRandomDuration();
+  render() {
 
-  return (
-    <Entity
-      obj-model={{ obj: props.obj, mtl: props.mtl }}
-      position={fromPosition}
-      rotation={rotation}
-      scale={props.scale}
+    return (
+      <Entity
+        obj-model={{ obj: this.props.obj, mtl: this.props.mtl }}
+        position={this.fromPosition}
+        rotation={this.rotation}
+        scale={this.props.scale}
+        sound={`src: ${this.props.sound};`}
+        _ref={this.props.save}
       >
-      <a-animation
+       <a-animation
           attribute='position'
-          from={fromPosition}
-          to={toPosition}
-          dur={duration}
+          from={this.fromPosition}
+          to={this.toPosition}
+          dur={this.duration}
           repeat='indefinite'
           direction='alternate'
-          >
-      </a-animation>
-    </Entity>
-  )
+        >
+        </a-animation>
+      </Entity>
+    )
+  }
 }
 
 export default Fish;

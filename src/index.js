@@ -18,52 +18,71 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      color: 'red',
       title: true,
+      sounds: [
+        '#vox',
+        '#bass',
+        '#guitar',
+        '#back-vox',
+        '#bass-drum',
+        '#drum',
+        '#hi-hat'
+      ],
+      assetsLoaded: false,
     };
   }
 
+  nodes = []
+
+  componentDidUpdate () {
+    setTimeout(() => this.playAllSounds(), 5000)
+  }
+
+  saveSound = (sound) => {
+    this.nodes.push(sound)
+  }
+
   handleTitleClick = () => {
-    this.setState({...this.state, title: false});
+    this.setState({title: false});
   }
 
-  changeColor() {
-    const colors = ['red', 'orange', 'yellow', 'green', 'blue'];
-    this.setState({
-      color: colors[Math.floor(Math.random() * colors.length)]
-    });
+  handleAssetsLoaded = () => {
+    this.setState({ assetsLoaded: true });
   }
 
-  generateFish = () => {
-    const fish = [];
-    for (let i = 0; i < 10; i++) {
-      fish.push(
-        <Fish
-          obj={'#fish-obj'}
-          mtl={'#fish-mtl'}
-          scale='0.1 0.1 0.1'
-        />
-      )
-    }
-    return fish;
+  playAllSounds = () => {
+    this.nodes.length && this.nodes.forEach(node => {
+      node.components.sound.playSound();
+    })
   }
+
+  renderFish = () => (
+    this.state.sounds.map(sound => (
+      <Fish
+        obj={'#fish-obj'}
+        mtl={'#fish-mtl'}
+        scale='0.1 0.1 0.1'
+        sound={sound}
+        key={sound}
+        save={this.saveSound}
+      />
+    ))
+  )
+
+  renderTitle = () => (
+    this.state.title && <Title handleClick={this.handleTitleClick} />
+  )
 
   render () {
-    const fish = this.generateFish();
-
     return (
-      <Scene>
-        <Assets/>
-        {
-          this.state.title && <Title
-            handleClick={this.handleTitleClick}
-          />
-        }
+      <Scene events={{ loaded: this.handleAssetsLoaded }}>
+        <Assets />
+        {this.renderTitle()}
         <Camera/>
         <Light/>
         <Floor/>
         <Sea/>
-        { fish }
+        {this.renderFish()}
       </Scene>
     );
   }
