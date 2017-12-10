@@ -35,7 +35,7 @@ class App extends React.Component {
   nodes = []
 
   componentDidUpdate () {
-    this.playAllSounds();
+    setTimeout(() => this.playAllSounds(), 5000)
   }
 
   saveSound = (sound) => {
@@ -47,14 +47,11 @@ class App extends React.Component {
   }
 
   handleAssetsLoaded = () => {
-    console.log('handleAssetsLoaded')
     this.setState({ assetsLoaded: true });
   }
 
   playAllSounds = () => {
-    console.log('playing sounds on this # nodes: ', this.nodes.length)
     this.nodes.length && this.nodes.forEach(node => {
-      // console.log('playing the node.components: ', node.components.sound.pool.children[0])
       node.components.sound.playSound();
     })
   }
@@ -66,7 +63,6 @@ class App extends React.Component {
         mtl={'#fish-mtl'}
         scale='0.1 0.1 0.1'
         sound={sound}
-        isSoundLoaded={this.state.assetsLoaded}
         key={sound}
         save={this.saveSound}
       />
@@ -78,7 +74,6 @@ class App extends React.Component {
   )
 
   render () {
-    // console.log('all the audio nodes', this.nodes, 'assetsLoaded', this.state.assetsLoaded)
     return (
       <Scene events={{ loaded: this.handleAssetsLoaded }}>
         <Assets />
@@ -87,7 +82,7 @@ class App extends React.Component {
         <Light/>
         <Floor/>
         <Sea/>
-        {this.state.assetsLoaded && this.renderFish()}
+        {this.renderFish()}
       </Scene>
     );
   }
